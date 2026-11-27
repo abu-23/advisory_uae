@@ -20,11 +20,11 @@ GRANT app_public, app_company, app_admin TO advisr_app;
 The sign-in login is separate, so a bug in a page or an API cannot read password hashes or MFA secrets:
 
 ```sql
-CREATE ROLE advisr_auth LOGIN NOINHERIT PASSWORD '<from the secrets manager>';
+CREATE ROLE advisr_auth LOGIN INHERIT PASSWORD '<from the secrets manager>';
 GRANT app_auth TO advisr_auth;
 ```
 
-`NOINHERIT` means the login has no table rights of its own. Every transaction must pick a role.
+`advisr_app` is `NOINHERIT`: it has no table rights of its own, and every transaction must pick a role. `advisr_auth` inherits `app_auth` because Better Auth does not switch roles; that login can only reach the sign-in tables.
 
 ## Roles and row-level security
 

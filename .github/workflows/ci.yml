@@ -121,7 +121,7 @@ jobs:
         run: |
           pnpm db:migrate
           pnpm db:seed
-          psql "$MIGRATION_DATABASE_URL" -c "CREATE ROLE advisr_app LOGIN NOINHERIT PASSWORD 'ci-only-not-secret'; GRANT app_public, app_company, app_admin TO advisr_app; CREATE ROLE advisr_auth LOGIN NOINHERIT PASSWORD 'ci-only-not-secret'; GRANT app_auth TO advisr_auth;"
+          psql "$MIGRATION_DATABASE_URL" -c "CREATE ROLE advisr_app LOGIN NOINHERIT PASSWORD 'ci-only-not-secret'; GRANT app_public, app_company, app_admin TO advisr_app; CREATE ROLE advisr_auth LOGIN INHERIT PASSWORD 'ci-only-not-secret'; GRANT app_auth TO advisr_auth;"
       - name: Throwaway secrets for this run only
         run: |
           echo "SESSION_SECRET=$(openssl rand -base64 32)" >> "$GITHUB_ENV"
