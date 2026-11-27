@@ -17,3 +17,5 @@ backups/
 next-env.d.ts
 .pnpm-store/
 src/generated/
+test-results/
+playwright-report/
