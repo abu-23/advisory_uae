@@ -15,6 +15,17 @@ Read `CLAUDE.md` for rules and `docs/PRD.md` for scope. `prototype/` is referenc
 
 The server refuses to start if a required value is missing or still a placeholder.
 
+## Accounts
+
+There is no public sign-up. Accounts are created by an operator:
+
+```
+pnpm user:create --role admin --email name@example.com --name "Name"
+pnpm user:create --role company --email name@example.com --name "Name" --company-slug <slug>
+```
+
+It prints a one-time random password once. Every account must set up an authenticator app (MFA) before it can reach any protected API. Roles: visitor (no account), company user, admin, superadmin. The sign-in and MFA screens are Phase 1; Phase 0 ships the sign-in API and protected endpoints under `/api/v1`.
+
 ## Checks
 
 `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build`

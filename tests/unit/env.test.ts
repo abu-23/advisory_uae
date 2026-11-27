@@ -5,6 +5,7 @@ const key = Buffer.alloc(32, 7).toString("base64");
 const valid = {
   NODE_ENV: "development",
   DATABASE_URL: "postgresql://app:devpass@localhost:5432/advisr",
+  AUTH_DATABASE_URL: "postgresql://auth:devpass@localhost:5432/advisr",
   REDIS_URL: "redis://localhost:6379",
   SESSION_SECRET: "x".repeat(40),
   AUTH_URL: "http://localhost:3000",
@@ -37,11 +38,12 @@ describe("loadEnv", () => {
     );
   });
 
-  it("requires https in production", () => {
-    expect(() => loadEnv({ ...valid, NODE_ENV: "production" })).toThrow(/https/);
-    expect(loadEnv({ ...valid, NODE_ENV: "production", AUTH_URL: "https://example.com" }).NODE_ENV).toBe(
-      "production",
-    );
+  it("requires https in staging and production", () => {
+    expect(() => loadEnv({ ...valid, APP_ENV: "production" })).toThrow(/https/);
+    expect(() => loadEnv({ ...valid, APP_ENV: "staging" })).toThrow(/https/);
+    expect(loadEnv({ ...valid, APP_ENV: "production", AUTH_URL: "https://example.com" }).APP_ENV).toBe("production");
+    // An optimised build on a laptop or in CI is not production.
+    expect(loadEnv({ ...valid, NODE_ENV: "production" }).APP_ENV).toBe("development");
   });
 
   it("never puts secret values in the error message", () => {
