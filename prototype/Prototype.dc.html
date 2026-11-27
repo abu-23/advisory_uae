@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Clickable prototype</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+button,input{font-family:inherit}
+</style>
+</helmet>
+<div style="width:390px;height:844px;box-sizing:border-box;background:#F4F6F8;color:#12213A;display:flex;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif">
+  <div style="flex:none;background:#FDF1DC;color:#6B3A06;font-size:12px;font-weight:600;text-align:center;padding:8px 16px">Prototype · sample data only, not real companies</div>
+
+  <!-- SCREEN 1: PICK SERVICES -->
+  <sc-if value="{{ isPick }}" hint-placeholder-val="{{ true }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:1;min-height:0;overflow-y:auto">
+      <div style="padding:20px 20px 0;display:flex;align-items:center;justify-content:space-between">
+        <div style="font-size:18px;font-weight:700;letter-spacing:-0.01em">Advisr UAE</div>
+        <div style="font-size:13px;color:#4F5B6B">UAE</div>
+      </div>
+      <div style="padding:24px 20px 0">
+        <h1 style="margin:0;font-size:28px;line-height:1.15;font-weight:700;letter-spacing:-0.02em">What do you need help with?</h1>
+        <p style="margin:10px 0 0;font-size:15px;line-height:1.45;color:#4F5B6B">Pick one or more. We'll show companies that offer them, with prices and what's included.</p>
+      </div>
+      <div style="padding:22px 20px 0;display:flex;flex-direction:column;gap:12px">
+        <button aria-pressed="{{ licenseOn }}" onClick="{{ pickLicense }}" style="{{ licenseCard }}">
+          <span style="flex:none;width:44px;height:44px;border-radius:12px;background:#EAF0F7;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12213A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span>
+          <span style="flex:1;min-width:0"><span style="display:block;font-size:17px;font-weight:700">Trade license</span><span style="display:block;font-size:13px;line-height:1.4;color:#4F5B6B;margin-top:2px">The permit to run your business in the UAE</span></span>
+          <span style="{{ licenseInd }}"><sc-if value="{{ licenseOn }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></sc-if></span>
+        </button>
+        <button aria-pressed="{{ ejariOn }}" onClick="{{ pickEjari }}" style="{{ ejariCard }}">
+          <span style="flex:none;width:44px;height:44px;border-radius:12px;background:#EAF0F7;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12213A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></span>
+          <span style="flex:1;min-width:0"><span style="display:block;font-size:17px;font-weight:700">Ejari</span><span style="display:block;font-size:13px;line-height:1.4;color:#4F5B6B;margin-top:2px">Register your office rental contract (Dubai)</span></span>
+          <span style="{{ ejariInd }}"><sc-if value="{{ ejariOn }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></sc-if></span>
+        </button>
+        <button aria-pressed="{{ visaOn }}" onClick="{{ pickVisa }}" style="{{ visaCard }}">
+          <span style="flex:none;width:44px;height:44px;border-radius:12px;background:#EAF0F7;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12213A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.5-1.6 1.7-2.4 3-2.4s2.5.8 3 2.4"/><path d="M15 10h3M15 14h3"/></svg></span>
+          <span style="flex:1;min-width:0"><span style="display:block;font-size:17px;font-weight:700">Visa services</span><span style="display:block;font-size:13px;line-height:1.4;color:#4F5B6B;margin-top:2px">Residence visas for owners and staff</span></span>
+          <span style="{{ visaInd }}"><sc-if value="{{ visaOn }}" hint-placeholder-val="{{ true }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></sc-if></span>
+        </button>
+      </div>
+    </div>
+    <div style="flex:none;background:#FFFFFF;border-top:1px solid #DDE2E8;padding:14px 20px 22px">
+      <p style="margin:0 0 10px;font-size:12px;line-height:1.4;color:#4F5B6B;text-align:center">No sign-up needed. We only ask for contact details if you request a quote.</p>
+      <button onClick="{{ toQuestions }}" style="{{ continueStyle }}">{{ countLabel }}</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- SCREEN 2: QUESTIONS -->
+  <sc-if value="{{ isQuestions }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:1;min-height:0;overflow-y:auto">
+      <div style="padding:12px 20px 0;display:flex;align-items:center;justify-content:space-between">
+        <button onClick="{{ toPick }}" style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;min-height:44px;background:none;border:none;color:#12213A;cursor:pointer;padding:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12213A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Back</button>
+        <div style="font-size:13px;color:#4F5B6B">3 quick questions</div>
+      </div>
+      <div style="padding:8px 20px 0">
+        <h1 style="margin:0;font-size:26px;line-height:1.15;font-weight:700;letter-spacing:-0.02em">A few details to match prices</h1>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.45;color:#4F5B6B">No personal details needed.</p>
+      </div>
+      <div style="padding:22px 20px 0;display:flex;flex-direction:column;gap:22px">
+        <div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:10px">Where is your business, or where will it be?</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <button aria-pressed="{{ locA }}" onClick="{{ pickLocA }}" style="{{ locAStyle }}">Dubai mainland</button>
+            <button aria-pressed="{{ locB }}" onClick="{{ pickLocB }}" style="{{ locBStyle }}">Dubai free zone</button>
+            <button aria-pressed="{{ locC }}" onClick="{{ pickLocC }}" style="{{ locCStyle }}">Abu Dhabi</button>
+            <button aria-pressed="{{ locD }}" onClick="{{ pickLocD }}" style="{{ locDStyle }}">Another emirate</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:10px">How many visas do you need?</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:8px">
+            <button aria-label="Fewer visas" onClick="{{ minus }}" style="width:44px;height:44px;border-radius:10px;border:1px solid #DDE2E8;background:#F4F6F8;color:#12213A;font-size:22px;font-weight:600;cursor:pointer">−</button>
+            <div style="font-size:20px;font-weight:700">{{ visaCount }}</div>
+            <button aria-label="More visas" onClick="{{ plus }}" style="width:44px;height:44px;border-radius:10px;border:1px solid #DDE2E8;background:#F4F6F8;color:#12213A;font-size:22px;font-weight:600;cursor:pointer">+</button>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:15px;font-weight:700;margin-bottom:10px">When do you need it done?</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <button aria-pressed="{{ timeA }}" onClick="{{ pickTimeA }}" style="{{ timeAStyle }}">Within a week</button>
+            <button aria-pressed="{{ timeB }}" onClick="{{ pickTimeB }}" style="{{ timeBStyle }}">2–4 weeks</button>
+            <button aria-pressed="{{ timeC }}" onClick="{{ pickTimeC }}" style="{{ timeCStyle }}">I'm flexible</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:none;background:#FFFFFF;border-top:1px solid #DDE2E8;padding:14px 20px 22px">
+      <button onClick="{{ toResults }}" style="width:100%;height:52px;border-radius:12px;border:none;background:#12213A;color:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer">Show matching companies</button>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- SCREEN 3: RESULTS -->
+  <sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:1;min-height:0;overflow-y:auto;padding-bottom:20px">
+      <div style="padding:12px 20px 0;display:flex;align-items:center;justify-content:space-between">
+        <button onClick="{{ toQuestions }}" style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;min-height:44px;background:none;border:none;color:#12213A;cursor:pointer;padding:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12213A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Back</button>
+        <div style="font-size:13px;color:#4F5B6B">{{ summaryLabel }}</div>
+      </div>
+      <div style="padding:4px 20px 0"><h1 style="margin:0;font-size:26px;line-height:1.15;font-weight:700;letter-spacing:-0.02em">Companies for you</h1></div>
+      <div style="margin:16px 20px 0;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:14px 16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="font-size:15px;font-weight:700">Verified only</div>
+          <button role="switch" aria-checked="{{ onlyVerified }}" aria-label="Verified only" onClick="{{ toggleVerified }}" style="{{ trackStyle }}"><span style="width:22px;height:22px;border-radius:50%;background:#FFFFFF;display:block"></span></button>
+        </div>
+        <p style="margin:8px 0 0;font-size:12px;line-height:1.45;color:#4F5B6B"><strong style="color:#12213A">Verified</strong> means our team checked the company's licence on the official portal. <strong style="color:#12213A">Unverified</strong> means we haven't checked yet. Neither says anything about service quality.</p>
+      </div>
+      <div style="padding:14px 20px 8px;display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#4F5B6B"><div style="font-weight:600;color:#12213A">{{ companyCount }}</div><div>Verified first, then lowest price</div></div>
+      <div style="padding:0 20px;display:flex;flex-direction:column;gap:12px">
+        <sc-for list="{{ items }}" as="item" hint-placeholder-count="5">
+          <button onClick="{{ item.open }}" style="display:block;width:100%;box-sizing:border-box;text-align:left;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:16px;cursor:pointer;color:#12213A">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+              <div style="min-width:0"><div style="font-size:16px;font-weight:700;line-height:1.25">{{ item.name }}</div><div style="font-size:13px;color:#4F5B6B;margin-top:2px">{{ item.pkg }}</div></div>
+              <div style="flex:none;text-align:right"><div style="font-size:11px;color:#4F5B6B">Year 1 total</div><div style="font-size:18px;font-weight:700">AED {{ item.price }}</div></div>
+            </div>
+            <div style="margin-top:10px">
+              <sc-if value="{{ item.verified }}" hint-placeholder-val="{{ true }}"><span style="display:inline-flex;align-items:center;gap:6px;background:#E3F3EF;color:#0B5A4C;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0B5A4C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Verified · checked {{ item.checked }}</span></sc-if>
+              <sc-if value="{{ item.unverified }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex;align-items:center;background:#EEF0F3;color:#4F5B6B;border:1px dashed #7B8798;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600">Unverified · not checked yet</span></sc-if>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px;margin-top:12px">
+              <div><div style="font-size:11px;color:#4F5B6B">Renewal from year 2</div><div style="font-size:14px;font-weight:600;margin-top:2px">{{ item.renewal }}</div></div>
+              <div><div style="font-size:11px;color:#4F5B6B">Turnaround</div><div style="font-size:14px;font-weight:600;margin-top:2px">{{ item.days }}</div></div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid #E6EAEF;font-size:12px;color:#4F5B6B">
+              <div style="display:flex;align-items:center;gap:6px">
+                <sc-if value="{{ item.hasRating }}" hint-placeholder-val="{{ true }}"><svg width="14" height="14" viewBox="0 0 24 24" fill="#B7791F" aria-hidden="true"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><span style="color:#12213A;font-weight:600">{{ item.rating }}</span><span>{{ item.reviews }}</span></sc-if>
+                <sc-if value="{{ item.noRating }}" hint-placeholder-val="{{ false }}"><span>No verified reviews yet</span></sc-if>
+              </div>
+              <div>Price updated {{ item.updated }}</div>
+            </div>
+            <sc-if value="{{ item.warn }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px;background:#FDF1DC;color:#6B3A06;border-radius:8px;padding:6px 10px;font-size:12px;font-weight:600">Renewal cost not stated. Ask before you commit.</div></sc-if>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- SCREEN 4: COMPANY PROFILE -->
+  <sc-if value="{{ isProvider }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:1;min-height:0;overflow-y:auto;padding-bottom:16px">
+      <div style="padding:12px 20px 0"><button onClick="{{ toResults }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;min-height:44px;background:none;border:none;color:#12213A;cursor:pointer;padding:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12213A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>All companies</button></div>
+      <div style="padding:4px 20px 0">
+        <h1 style="margin:0;font-size:24px;line-height:1.15;font-weight:700;letter-spacing:-0.02em">{{ pName }}</h1>
+        <div style="margin-top:6px;font-size:14px;color:#4F5B6B">{{ pPkg }} · AED {{ pPrice }} year 1</div>
+      </div>
+      <sc-if value="{{ pVerified }}" hint-placeholder-val="{{ true }}">
+        <div style="margin:16px 20px 0;background:#E3F3EF;border-radius:14px;padding:14px 16px">
+          <div style="display:flex;align-items:center;gap:8px;color:#0B5A4C;font-size:15px;font-weight:700"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B5A4C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>Verified</div>
+          <div style="margin-top:8px;font-size:13px;line-height:1.5;color:#0B3F36">Licence checked on the official portal: <strong>{{ pChecked }}</strong>. The badge expires with the licence and is re-checked after that.</div>
+          <div style="margin-top:6px;font-size:12px;line-height:1.4;color:#0B3F36">Verified confirms the licence only. It is not a guarantee of service quality.</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ pUnverified }}" hint-placeholder-val="{{ false }}">
+        <div style="margin:16px 20px 0;background:#EEF0F3;border:1px dashed #7B8798;border-radius:14px;padding:14px 16px">
+          <div style="font-size:15px;font-weight:700;color:#12213A">Unverified</div>
+          <div style="margin-top:6px;font-size:13px;line-height:1.5;color:#4F5B6B">We haven't checked this company's licence yet. You can still request a quote, but check their licence yourself before paying anything.</div>
+        </div>
+      </sc-if>
+      <div style="margin:12px 20px 0;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:16px">
+        <div style="font-size:15px;font-weight:700">Price breakdown</div>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:14px">
+          <div style="display:flex;justify-content:space-between"><span style="color:#4F5B6B">Government fees (indicative)</span><span style="font-weight:600">AED 7,300</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#4F5B6B">Company service fee</span><span style="font-weight:600">AED {{ pFee }}</span></div>
+          <div style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid #E6EAEF"><span style="font-weight:700">Year 1 total</span><span style="font-weight:700">AED {{ pPrice }}</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#4F5B6B">Renewal from year 2</span><span style="font-weight:600">{{ pRenewal }}</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="color:#4F5B6B">Turnaround</span><span style="font-weight:600">{{ pDays }}</span></div>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:#4F5B6B">Supplied by the company, updated {{ pUpdated }}. Confirmed in their written quote.</div>
+      </div>
+      <div style="margin:12px 20px 0;display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px">
+        <div style="background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:16px"><div style="font-size:14px;font-weight:700">Included</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.35"><div>Trade licence issue</div><div>Establishment card</div><div>2 residence visas</div><div>Document typing</div></div></div>
+        <div style="background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:16px"><div style="font-size:14px;font-weight:700">Not included</div><div style="margin-top:8px;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.35;color:#4F5B6B"><div>Office rental / Ejari</div><div>Bank account opening</div><div>Medical tests for family</div></div></div>
+      </div>
+      <sc-if value="{{ pHasRating }}" hint-placeholder-val="{{ true }}">
+        <div style="margin:12px 20px 0;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:16px">
+          <div style="display:flex;align-items:center;gap:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="#B7791F" aria-hidden="true"><path d="M12 3l2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 16.9 6.4 20l1.3-6.2L3 9.5l6.3-.7z"/></svg><div style="font-size:18px;font-weight:700">{{ pRating }}</div><div style="font-size:13px;color:#4F5B6B">{{ pReviews }}</div></div>
+          <div style="margin-top:6px;font-size:12px;line-height:1.4;color:#4F5B6B">Reviews come only from customers who completed a service through the app.</div>
+          <div style="margin-top:12px;padding-top:12px;border-top:1px solid #E6EAEF"><div style="font-size:12px;font-weight:600;color:#0B5A4C">Verified customer · Oct 2026</div><div style="margin-top:4px;font-size:14px;line-height:1.45">Sample review text. Final price matched the quote and the licence arrived on time.</div></div>
+        </div>
+      </sc-if>
+    </div>
+    <div style="flex:none;background:#FFFFFF;border-top:1px solid #DDE2E8;padding:14px 20px 22px">
+      <button onClick="{{ toQuote }}" style="width:100%;height:52px;border-radius:12px;border:none;background:#12213A;color:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer">Request a quote</button>
+      <div style="margin-top:8px;font-size:12px;color:#4F5B6B;text-align:center">Free. Your details go only to this company, and only with your OK.</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- SCREEN 5: REQUEST A QUOTE -->
+  <sc-if value="{{ isQuote }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:1;min-height:0;overflow-y:auto;padding-bottom:16px">
+      <div style="padding:12px 20px 0"><button onClick="{{ toProvider }}" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;min-height:44px;background:none;border:none;color:#12213A;cursor:pointer;padding:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12213A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Back</button></div>
+      <div style="padding:4px 20px 0">
+        <h1 style="margin:0;font-size:26px;line-height:1.15;font-weight:700;letter-spacing:-0.02em">Request a quote</h1>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.45;color:#4F5B6B">From <strong style="color:#12213A">{{ pName }}</strong>. Free, no obligation.</p>
+      </div>
+      <div style="margin:16px 20px 0;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:14px 16px">
+        <div style="font-size:12px;font-weight:600;color:#4F5B6B">What the company will see</div>
+        <div style="margin-top:8px;display:flex;flex-direction:column;gap:4px;font-size:14px"><div>{{ servicesLabel }}</div><div>{{ detailsLabel }}</div><div>Your name and one way to reach you</div></div>
+      </div>
+      <div style="padding:16px 20px 0;display:flex;flex-direction:column;gap:14px">
+        <div><label for="q-name" style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Your name</label><input id="q-name" type="text" placeholder="Full name" autocomplete="off" style="width:100%;box-sizing:border-box;height:48px;border:1px solid #7B8798;border-radius:10px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#12213A"></div>
+        <div><label for="q-contact" style="display:block;font-size:14px;font-weight:600;margin-bottom:6px">Phone or email (one is enough)</label><input id="q-contact" type="text" placeholder="How should they reach you?" autocomplete="off" style="width:100%;box-sizing:border-box;height:48px;border:1px solid #7B8798;border-radius:10px;padding:0 14px;font-size:16px;background:#FFFFFF;color:#12213A"></div>
+      </div>
+      <div style="margin:16px 20px 0;display:flex;gap:12px;align-items:flex-start">
+        <button role="checkbox" aria-checked="{{ consent }}" aria-label="I agree to share my details with this company" onClick="{{ toggleConsent }}" style="{{ boxStyle }}"><sc-if value="{{ consent }}" hint-placeholder-val="{{ false }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></sc-if></button>
+        <div style="font-size:13px;line-height:1.5">I agree to share these details with <strong>{{ pName }} only</strong>, so they can send me a quote. I can withdraw this at any time. Privacy notice [link to be added].</div>
+      </div>
+      <div style="margin:12px 20px 0;background:#EAF0F7;border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.45">We never ask for your passport, Emirates ID or bank details here.</div>
+    </div>
+    <div style="flex:none;background:#FFFFFF;border-top:1px solid #DDE2E8;padding:14px 20px 22px">
+      <button onClick="{{ send }}" style="{{ sendStyle }}">Send request</button>
+      <sc-if value="{{ needConsent }}" hint-placeholder-val="{{ true }}"><div style="margin-top:8px;font-size:12px;color:#4F5B6B;text-align:center">Tick the box above to send.</div></sc-if>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- SCREEN 6: SENT -->
+  <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+  <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+    <div style="flex:1;min-height:0;overflow-y:auto">
+      <div style="padding:64px 20px 0;display:flex;flex-direction:column;align-items:center;text-align:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:#E3F3EF;display:flex;align-items:center;justify-content:center"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0B5A4C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <h1 style="margin:20px 0 0;font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-0.02em">Request sent</h1>
+        <p style="margin:10px 0 0;font-size:15px;line-height:1.5;color:#4F5B6B">{{ pName }} will contact you with a written quote. Only this company received your details.</p>
+      </div>
+      <div style="margin:28px 20px 0;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:16px;font-size:14px;line-height:1.5"><div style="font-weight:700;margin-bottom:6px">Before you pay anything</div><div style="color:#4F5B6B">Check that the quote lists government fees, company fees, visas and renewal costs. Avoid paying the full amount upfront.</div></div>
+    </div>
+    <div style="flex:none;background:#FFFFFF;border-top:1px solid #DDE2E8;padding:14px 20px 22px;display:flex;flex-direction:column;gap:10px">
+      <button onClick="{{ toResults }}" style="width:100%;height:52px;border-radius:12px;border:none;background:#12213A;color:#FFFFFF;font-size:16px;font-weight:600;cursor:pointer">Back to companies</button>
+      <button onClick="{{ restart }}" style="width:100%;height:48px;border-radius:12px;border:1px solid #DDE2E8;background:#FFFFFF;color:#12213A;font-size:15px;font-weight:600;cursor:pointer">Start again</button>
+    </div>
+  </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { screen: 'pick', license: true, ejari: false, visa: true, loc: 'a', time: 'b', visas: 2, onlyVerified: false, picked: 0, consent: false };
+  }
+  renderVals() {
+    const s = this.state;
+    const go = (screen) => () => this.setState({ screen: screen });
+
+    // pick screen
+    const cardBase = 'display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;padding:16px;border-radius:14px;background:#FFFFFF;text-align:left;cursor:pointer;color:#12213A;font-family:inherit;';
+    const indBase = 'flex:none;width:26px;height:26px;border-radius:50%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;';
+    const card = (on) => cardBase + (on ? 'border:2px solid #12213A;' : 'border:2px solid #DDE2E8;');
+    const ind = (on) => indBase + (on ? 'background:#12213A;' : 'border:2px solid #7B8798;background:#FFFFFF;');
+    const n = (s.license ? 1 : 0) + (s.ejari ? 1 : 0) + (s.visa ? 1 : 0);
+    const names = [];
+    if (s.license) names.push('Trade license');
+    if (s.ejari) names.push('Ejari');
+    if (s.visa) names.push('Visa services');
+
+    // chips
+    const chipBase = 'min-height:44px;padding:0 16px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;';
+    const chip = (on) => chipBase + (on ? 'border:2px solid #12213A;background:#12213A;color:#FFFFFF;' : 'border:2px solid #DDE2E8;background:#FFFFFF;color:#12213A;');
+    const locNames = { a: 'Dubai mainland', b: 'Dubai free zone', c: 'Abu Dhabi', d: 'Another emirate' };
+    const timeNames = { a: 'within a week', b: '2–4 weeks', c: 'flexible' };
+
+    // companies
+    const all = [
+      { name: 'Al Noor Business Services (sample)', price: '14,800', fee: '7,500', verified: true, checked: '12 Nov 2026', renewal: 'AED 9,200 / yr', days: '5–7 working days', rating: '4.7', reviews: '(42 verified reviews)', updated: '20 Nov 2026' },
+      { name: 'Harbor Gate Consultants (sample)', price: '12,900', fee: '5,600', verified: true, checked: '20 Nov 2026', renewal: 'AED 8,400 / yr', days: '7–10 working days', rating: '4.4', reviews: '(19 verified reviews)', updated: '18 Nov 2026' },
+      { name: 'Desert Rose PRO (sample)', price: '16,200', fee: '8,900', verified: true, checked: '5 Nov 2026', renewal: 'AED 9,000 / yr', days: '3–5 working days', rating: '4.8', reviews: '(11 verified reviews)', updated: '22 Nov 2026' },
+      { name: 'Falcon Edge Setup (sample)', price: '9,990', fee: '2,690', verified: false, renewal: 'Not stated', days: '5–7 working days', updated: '1 Nov 2026', warn: true },
+      { name: 'Blue Palm Services (sample)', price: '11,000', fee: '3,700', verified: false, renewal: 'AED 7,500 / yr', days: '10–14 working days', updated: '9 Nov 2026' }
+    ];
+    const shown = s.onlyVerified ? all.filter((c) => c.verified) : all;
+    const items = shown.map((c) => ({
+      name: c.name, pkg: 'Mainland licence + 2 visas', price: c.price,
+      verified: c.verified, unverified: !c.verified, checked: c.checked || '',
+      renewal: c.renewal, days: c.days, updated: c.updated,
+      hasRating: !!c.rating, noRating: !c.rating, rating: c.rating || '', reviews: c.reviews || '',
+      warn: !!c.warn,
+      open: () => this.setState({ screen: 'provider', picked: all.indexOf(c), consent: false })
+    }));
+    const p = all[s.picked] || all[0];
+
+    const track = 'flex:none;width:50px;height:30px;border-radius:15px;border:none;padding:4px;cursor:pointer;display:flex;align-items:center;box-sizing:border-box;';
+    const box = 'flex:none;width:28px;height:28px;border-radius:8px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;';
+    const btn = 'width:100%;height:52px;border-radius:12px;border:none;font-size:16px;font-weight:600;';
+
+    return {
+      isPick: s.screen === 'pick', isQuestions: s.screen === 'questions', isResults: s.screen === 'results',
+      isProvider: s.screen === 'provider', isQuote: s.screen === 'quote', isSent: s.screen === 'sent',
+      toPick: go('pick'), toQuestions: n > 0 || s.screen !== 'pick' ? go('questions') : () => {}, toResults: go('results'),
+      toProvider: go('provider'), toQuote: go('quote'),
+      restart: () => this.setState({ screen: 'pick', consent: false, onlyVerified: false }),
+
+      licenseOn: s.license, ejariOn: s.ejari, visaOn: s.visa,
+      licenseCard: card(s.license), ejariCard: card(s.ejari), visaCard: card(s.visa),
+      licenseInd: ind(s.license), ejariInd: ind(s.ejari), visaInd: ind(s.visa),
+      pickLicense: () => this.setState({ license: !s.license }),
+      pickEjari: () => this.setState({ ejari: !s.ejari }),
+      pickVisa: () => this.setState({ visa: !s.visa }),
+      countLabel: n > 0 ? 'Continue · ' + n + ' selected' : 'Pick at least one service',
+      continueStyle: btn + (n > 0 ? 'background:#12213A;color:#FFFFFF;cursor:pointer;' : 'background:#E6EAEF;color:#4F5B6B;cursor:not-allowed;'),
+
+      locA: s.loc === 'a', locB: s.loc === 'b', locC: s.loc === 'c', locD: s.loc === 'd',
+      locAStyle: chip(s.loc === 'a'), locBStyle: chip(s.loc === 'b'), locCStyle: chip(s.loc === 'c'), locDStyle: chip(s.loc === 'd'),
+      pickLocA: () => this.setState({ loc: 'a' }), pickLocB: () => this.setState({ loc: 'b' }), pickLocC: () => this.setState({ loc: 'c' }), pickLocD: () => this.setState({ loc: 'd' }),
+      timeA: s.time === 'a', timeB: s.time === 'b', timeC: s.time === 'c',
+      timeAStyle: chip(s.time === 'a'), timeBStyle: chip(s.time === 'b'), timeCStyle: chip(s.time === 'c'),
+      pickTimeA: () => this.setState({ time: 'a' }), pickTimeB: () => this.setState({ time: 'b' }), pickTimeC: () => this.setState({ time: 'c' }),
+      visaCount: s.visas,
+      minus: () => this.setState({ visas: Math.max(0, s.visas - 1) }),
+      plus: () => this.setState({ visas: Math.min(10, s.visas + 1) }),
+
+      summaryLabel: locNames[s.loc] + ' · ' + s.visas + (s.visas === 1 ? ' visa' : ' visas'),
+      onlyVerified: s.onlyVerified,
+      toggleVerified: () => this.setState({ onlyVerified: !s.onlyVerified }),
+      trackStyle: track + (s.onlyVerified ? 'background:#0B6B5B;justify-content:flex-end;' : 'background:#7B8798;justify-content:flex-start;'),
+      items: items,
+      companyCount: items.length + ' companies',
+
+      pName: p.name, pPkg: 'Mainland licence + 2 visas', pPrice: p.price, pFee: p.fee,
+      pVerified: p.verified, pUnverified: !p.verified, pChecked: p.checked || '',
+      pRenewal: p.renewal, pDays: p.days, pUpdated: p.updated,
+      pHasRating: !!p.rating, pRating: p.rating || '', pReviews: p.reviews || '',
+
+      servicesLabel: names.join(' + '),
+      detailsLabel: locNames[s.loc] + ' · ' + s.visas + (s.visas === 1 ? ' visa' : ' visas') + ' · ' + timeNames[s.time],
+      consent: s.consent, needConsent: !s.consent,
+      toggleConsent: () => this.setState({ consent: !s.consent }),
+      boxStyle: box + (s.consent ? 'background:#12213A;border:2px solid #12213A;' : 'background:#FFFFFF;border:2px solid #7B8798;'),
+      send: () => { if (s.consent) this.setState({ screen: 'sent' }); },
+      sendStyle: btn + (s.consent ? 'background:#12213A;color:#FFFFFF;cursor:pointer;' : 'background:#E6EAEF;color:#4F5B6B;cursor:not-allowed;')
+    };
+  }
+}
+</script>
+</body>
+</html>

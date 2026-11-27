@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Company dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="width:1280px;height:820px;box-sizing:border-box;background:#F4F6F8;color:#12213A;display:flex;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif">
+  <div style="background:#FDF1DC;color:#6B3A06;font-size:12px;font-weight:600;text-align:center;padding:8px 16px">Prototype · sample data only, not real companies</div>
+
+  <div style="flex:1;display:flex;min-height:0">
+
+    <div style="width:240px;flex:none;background:#12213A;color:#FFFFFF;padding:24px 16px;box-sizing:border-box;display:flex;flex-direction:column;gap:6px">
+      <div style="font-size:18px;font-weight:700;padding:0 8px 18px">Advisr UAE<span style="display:block;font-size:12px;font-weight:500;color:#C9D3E0;margin-top:2px">Company portal</span></div>
+      <div style="padding:12px;border-radius:10px;background:#243756;font-size:14px;font-weight:600">Packages and prices</div>
+      <div style="padding:12px;border-radius:10px;font-size:14px;font-weight:500;color:#E3E9F1;display:flex;justify-content:space-between;align-items:center">Quote requests <span style="background:#FFFFFF;color:#12213A;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700">3</span></div>
+      <div style="padding:12px;border-radius:10px;font-size:14px;font-weight:500;color:#E3E9F1">Reviews</div>
+      <div style="padding:12px;border-radius:10px;font-size:14px;font-weight:500;color:#E3E9F1">Licence and documents</div>
+      <div style="flex:1"></div>
+      <div style="padding:12px;font-size:12px;line-height:1.5;color:#C9D3E0;border-top:1px solid #2F4466">Signed in as a company admin. Two-step sign-in is required.</div>
+    </div>
+
+    <div style="flex:1;min-width:0;padding:28px 32px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between">
+        <div>
+          <h1 style="margin:0;font-size:26px;font-weight:700;letter-spacing:-0.02em">Al Noor Business Services (sample)</h1>
+          <div style="margin-top:4px;font-size:14px;color:#4F5B6B">You can see and edit only your own company's packages and requests.</div>
+        </div>
+        <div style="font-size:13px;color:#4F5B6B">Updated 27 Nov 2026</div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:stretch">
+        <div style="flex:1;background:#E3F3EF;border-radius:14px;padding:16px 18px;box-sizing:border-box">
+          <div style="display:flex;align-items:center;gap:8px;color:#0B5A4C;font-size:15px;font-weight:700">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0B5A4C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+            Verified
+          </div>
+          <div style="margin-top:8px;font-size:13px;line-height:1.5;color:#0B3F36">Checked 12 Nov 2026 · Licence valid until 18 Mar 2027. This status is set by our team and can't be edited here.</div>
+          <div style="margin-top:12px;display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:10px;background:#FFFFFF;border:1px solid #0B6B5B;color:#0B5A4C;font-size:14px;font-weight:600">Upload renewed licence</div>
+        </div>
+        <div style="flex:1;background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:16px 18px;box-sizing:border-box">
+          <div style="font-size:13px;color:#4F5B6B">Last 30 days</div>
+          <div style="display:flex;gap:28px;margin-top:8px">
+            <div><div style="font-size:26px;font-weight:700">128</div><div style="font-size:12px;color:#4F5B6B">Profile views</div></div>
+            <div><div style="font-size:26px;font-weight:700">9</div><div style="font-size:12px;color:#4F5B6B">Quote requests</div></div>
+            <div><div style="font-size:26px;font-weight:700">4.7</div><div style="font-size:12px;color:#4F5B6B">Verified rating</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:18px 20px;box-sizing:border-box">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="font-size:16px;font-weight:700">Packages and prices</div>
+          <div style="display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:10px;background:#12213A;color:#FFFFFF;font-size:14px;font-weight:600">Add package</div>
+        </div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 0.8fr;gap:12px;font-size:12px;font-weight:600;color:#4F5B6B;padding-bottom:8px;border-bottom:1px solid #E6EAEF">
+          <div>Package</div><div>Year 1 total</div><div>Renewal</div><div>Price updated</div><div>Status</div>
+        </div>
+        <div style="display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 0.8fr;gap:12px;font-size:14px;padding:12px 0;border-bottom:1px solid #E6EAEF;align-items:center">
+          <div style="font-weight:600">Mainland licence + 2 visas</div><div>AED 14,800</div><div>AED 9,200 / yr</div><div>20 Nov 2026</div><div style="color:#0B5A4C;font-weight:600">Live</div>
+        </div>
+        <div style="display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 0.8fr;gap:12px;font-size:14px;padding:12px 0;border-bottom:1px solid #E6EAEF;align-items:center">
+          <div style="font-weight:600">Ejari registration (Dubai)</div><div>AED 650</div><div>AED 650 / yr</div><div>20 Nov 2026</div><div style="color:#0B5A4C;font-weight:600">Live</div>
+        </div>
+        <div style="display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 0.8fr;gap:12px;font-size:14px;padding:12px 0 0;align-items:center">
+          <div style="font-weight:600">Single residence visa</div><div>AED 4,100</div><div>AED 3,900 / 2 yrs</div><div style="color:#8A4B08;font-weight:600">Over 60 days ago</div><div style="color:#8A4B08;font-weight:600">Update needed</div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE2E8;border-radius:14px;padding:18px 20px;box-sizing:border-box">
+        <div style="font-size:16px;font-weight:700">Quote requests</div>
+        <div style="margin-top:4px;font-size:12px;color:#4F5B6B">Contact details appear only after the customer agreed to share them with your company.</div>
+        <div style="margin-top:12px;display:grid;grid-template-columns:1fr 2fr 1.2fr 1.4fr 0.8fr;gap:12px;font-size:12px;font-weight:600;color:#4F5B6B;padding-bottom:8px;border-bottom:1px solid #E6EAEF">
+          <div>Received</div><div>Request</div><div>Location</div><div>Contact</div><div>Status</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 2fr 1.2fr 1.4fr 0.8fr;gap:12px;font-size:14px;padding:10px 0;border-bottom:1px solid #E6EAEF;align-items:center">
+          <div>27 Nov</div><div>Licence + 2 visas</div><div>Dubai mainland</div><div style="color:#4F5B6B">Sample · +971 5X XXX XXXX</div><div style="color:#0B5A4C;font-weight:600">New</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 2fr 1.2fr 1.4fr 0.8fr;gap:12px;font-size:14px;padding:10px 0 0;align-items:center">
+          <div>26 Nov</div><div>Ejari registration</div><div>Dubai mainland</div><div style="color:#4F5B6B">Sample · name@example.com</div><div style="color:#4F5B6B;font-weight:600">Replied</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":820}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
