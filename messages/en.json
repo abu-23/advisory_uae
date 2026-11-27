@@ -1,0 +1,99 @@
+{
+  "common": {
+    "brand": "Advisr UAE",
+    "sampleBanner": "Sample data only, not real companies",
+    "back": "Back",
+    "switchLanguage": "العربية",
+    "switchLanguageLabel": "Switch to Arabic",
+    "aed": "AED {amount}",
+    "perYear": "AED {amount} / yr",
+    "perPeriod": "AED {amount} / {months, plural, =12 {yr} =24 {2 yrs} other {# months}}",
+    "notStated": "Not stated",
+    "workingDays": "{min, plural, =1 {1} other {#}}–{max} working days",
+    "workingDaysSame": "{days, plural, =1 {1 working day} other {# working days}}"
+  },
+  "services": {
+    "TRADE_LICENSE": "Trade license",
+    "TRADE_LICENSE_desc": "The permit to run your business in the UAE",
+    "EJARI": "Ejari",
+    "EJARI_desc": "Register your office rental contract (Dubai)",
+    "VISA": "Visa services",
+    "VISA_desc": "Residence visas for owners and staff"
+  },
+  "locations": {
+    "DUBAI_MAINLAND": "Dubai mainland",
+    "DUBAI_FREE_ZONE": "Dubai free zone",
+    "ABU_DHABI": "Abu Dhabi",
+    "OTHER_EMIRATE": "Another emirate"
+  },
+  "timings": {
+    "WEEK": "Within a week",
+    "WEEKS_2_4": "2–4 weeks",
+    "FLEXIBLE": "I'm flexible"
+  },
+  "home": {
+    "title": "What do you need help with?",
+    "intro": "Pick one or more. We'll show companies that offer them, with prices and what's included.",
+    "noSignup": "No sign-up needed. We only ask for contact details if you request a quote.",
+    "continue": "Continue",
+    "pickOne": "Pick at least one service."
+  },
+  "questions": {
+    "step": "3 quick questions",
+    "title": "A few details to match prices",
+    "noPersonal": "No personal details needed.",
+    "location": "Where is your business, or where will it be?",
+    "visas": "How many visas do you need?",
+    "fewer": "Fewer visas",
+    "more": "More visas",
+    "timing": "When do you need it done?",
+    "submit": "Show matching companies"
+  },
+  "results": {
+    "title": "Companies for you",
+    "summary": "{location} · {visas, plural, =0 {no visas} =1 {1 visa} other {# visas}}",
+    "verifiedOnly": "Verified only",
+    "showAll": "Show all companies",
+    "explainer": "Verified means our team checked the company's licence on the official portal. Unverified means we haven't checked yet. Neither says anything about service quality.",
+    "count": "{count, plural, =0 {No companies} =1 {1 company} other {# companies}}",
+    "order": "Verified first, then lowest price",
+    "year1": "Year 1 total",
+    "renewal": "Renewal from year 2",
+    "turnaround": "Turnaround",
+    "verified": "Verified · checked {date}",
+    "unverified": "Unverified · not checked yet",
+    "reviews": "({count, plural, =1 {1 verified review} other {# verified reviews}})",
+    "noReviews": "No verified reviews yet",
+    "updated": "Price updated {date}",
+    "stale": "Price not updated for over 60 days. Ask the company to confirm.",
+    "renewalWarning": "Renewal cost not stated. Ask before you commit.",
+    "pricesNote": "Prices are supplied by each company and confirmed in their written quote. Government fees are indicative.",
+    "empty": "No companies match these answers yet. Try another location or fewer services.",
+    "changeAnswers": "Change answers"
+  },
+  "profile": {
+    "allCompanies": "All companies",
+    "packageLine": "{title} · AED {amount} year 1",
+    "verifiedTitle": "Verified",
+    "verifiedBody": "Licence checked on the official portal: {date}. The badge expires with the licence and is re-checked after that.",
+    "licenceValid": "Licence valid until {date}.",
+    "verifiedNote": "Verified confirms the licence only. It is not a guarantee of service quality.",
+    "unverifiedTitle": "Unverified",
+    "unverifiedBody": "We haven't checked this company's licence yet. You can still request a quote, but check their licence yourself before paying anything.",
+    "breakdown": "Price breakdown",
+    "govFees": "Government fees (indicative)",
+    "serviceFee": "Company service fee",
+    "year1": "Year 1 total",
+    "renewal": "Renewal from year 2",
+    "turnaround": "Turnaround",
+    "supplied": "Supplied by the company, updated {date}. Confirmed in their written quote.",
+    "included": "Included",
+    "notIncluded": "Not included",
+    "reviewsTitle": "Reviews",
+    "reviewsNote": "Reviews come only from customers who completed a service through the app.",
+    "verifiedCustomer": "Verified customer · {date}",
+    "sampleReview": "Sample review",
+    "noReviews": "No verified reviews yet",
+    "notFound": "We couldn't find this company."
+  }
+}
