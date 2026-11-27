@@ -1,0 +1,253 @@
+// Advisr UAE data model (Phase 0).
+// Rules that Prisma cannot express (roles, grants, row-level security, append-only audit log)
+// live in the SQL migration "security_roles_rls".
+// Sign-in tables (users, sessions, MFA) are added in step 5 with the auth library.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ServiceType {
+  TRADE_LICENSE
+  EJARI
+  VISA
+}
+
+enum Location {
+  DUBAI_MAINLAND
+  DUBAI_FREE_ZONE
+  ABU_DHABI
+  OTHER_EMIRATE
+}
+
+enum CompanyStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum PackageStatus {
+  DRAFT
+  LIVE
+  ARCHIVED
+}
+
+enum VerificationStatus {
+  VERIFIED
+  REJECTED
+  REVOKED
+}
+
+enum ScanStatus {
+  PENDING
+  CLEAN
+  INFECTED
+}
+
+enum QuoteStatus {
+  NEW
+  REPLIED
+  COMPLETED
+  CLOSED
+}
+
+enum ContactType {
+  PHONE
+  EMAIL
+}
+
+enum ReviewStatus {
+  PENDING
+  PUBLISHED
+  REJECTED
+}
+
+model Company {
+  id            String        @id @default(uuid()) @db.Uuid
+  slug          String        @unique
+  name          String
+  locations     Location[]
+  licenceNumber String?       @map("licence_number")
+  status        CompanyStatus @default(ACTIVE)
+  /// True for fake seed companies. Production must contain none.
+  isSample      Boolean       @default(false) @map("is_sample")
+  createdAt     DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt     DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  packages      Package[]
+  verifications VerificationRecord[]
+  documents     LicenceDocument[]
+  quoteRequests QuoteRequest[]
+  consents      ConsentRecord[]
+  reviews       Review[]
+
+  @@map("company")
+}
+
+model Package {
+  id                  String        @id @default(uuid()) @db.Uuid
+  companyId           String        @map("company_id") @db.Uuid
+  serviceTypes        ServiceType[] @map("service_types")
+  locations           Location[]
+  titleEn             String        @map("title_en")
+  titleAr             String        @map("title_ar")
+  /// Money in fils (AED x 100). Government fees are indicative.
+  govFeesFils         Int           @map("gov_fees_fils")
+  serviceFeeFils      Int           @map("service_fee_fils")
+  /// Null means "Not stated", shown as a warning.
+  renewalFeeFils      Int?          @map("renewal_fee_fils")
+  renewalPeriodMonths Int?          @map("renewal_period_months")
+  visasMin            Int           @default(0) @map("visas_min")
+  visasMax            Int           @default(0) @map("visas_max")
+  turnaroundDaysMin   Int           @map("turnaround_days_min")
+  turnaroundDaysMax   Int           @map("turnaround_days_max")
+  includesEn          String[]      @map("includes_en")
+  includesAr          String[]      @map("includes_ar")
+  excludesEn          String[]      @map("excludes_en")
+  excludesAr          String[]      @map("excludes_ar")
+  priceUpdatedAt      DateTime      @map("price_updated_at") @db.Timestamptz(3)
+  status              PackageStatus @default(DRAFT)
+  createdAt           DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt           DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  company       Company        @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  quoteRequests QuoteRequest[]
+
+  @@index([companyId])
+  @@index([status])
+  @@map("package")
+}
+
+/// Append-only history. "Verified" is calculated from the latest record, never stored.
+model VerificationRecord {
+  id               String             @id @default(uuid()) @db.Uuid
+  companyId        String             @map("company_id") @db.Uuid
+  status           VerificationStatus
+  checkedAt        DateTime           @map("checked_at") @db.Timestamptz(3)
+  licenceExpiresAt DateTime           @map("licence_expires_at") @db.Timestamptz(3)
+  /// Admin user id. Foreign key added with the user table in step 5.
+  checkedBy        String             @map("checked_by") @db.Uuid
+  licenceDocId     String?            @map("licence_doc_id") @db.Uuid
+  createdAt        DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  company    Company          @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  licenceDoc LicenceDocument? @relation(fields: [licenceDocId], references: [id], onDelete: Restrict)
+
+  @@index([companyId, checkedAt(sort: Desc)])
+  @@map("verification_record")
+}
+
+/// Licence copies uploaded by companies (Phase 1). Stored encrypted in a private bucket, admin-only.
+model LicenceDocument {
+  id          String     @id @default(uuid()) @db.Uuid
+  companyId   String     @map("company_id") @db.Uuid
+  storageKey  String     @unique @map("storage_key")
+  sha256      String
+  sizeBytes   Int        @map("size_bytes")
+  mimeType    String     @map("mime_type")
+  scanStatus  ScanStatus @default(PENDING) @map("scan_status")
+  uploadedBy  String     @map("uploaded_by") @db.Uuid
+  deleteAfter DateTime   @map("delete_after") @db.Timestamptz(3)
+  createdAt   DateTime   @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  company       Company              @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  verifications VerificationRecord[]
+
+  @@index([companyId])
+  @@map("licence_document")
+}
+
+model PolicyVersion {
+  version     String   @id
+  textEn      String   @map("text_en")
+  textAr      String   @map("text_ar")
+  publishedAt DateTime @map("published_at") @db.Timestamptz(3)
+
+  consents ConsentRecord[]
+
+  @@map("policy_version")
+}
+
+model QuoteRequest {
+  id              String      @id @default(uuid()) @db.Uuid
+  companyId       String      @map("company_id") @db.Uuid
+  packageId       String      @map("package_id") @db.Uuid
+  /// Answers to the quick questions. Never personal data.
+  answers         Json
+  /// Field-level encrypted (AES-256-GCM envelope). Decrypted only after a consent check.
+  contactNameEnc  Bytes       @map("contact_name_enc")
+  contactValueEnc Bytes       @map("contact_value_enc")
+  contactType     ContactType @map("contact_type")
+  keyId           String      @map("key_id")
+  status          QuoteStatus @default(NEW)
+  createdAt       DateTime    @default(now()) @map("created_at") @db.Timestamptz(3)
+  /// Default 12 months after creation, pending legal review.
+  deleteAfter     DateTime    @map("delete_after") @db.Timestamptz(3)
+
+  company Company        @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  package Package        @relation(fields: [packageId], references: [id], onDelete: Restrict)
+  consent ConsentRecord?
+  review  Review?
+
+  @@index([companyId, createdAt(sort: Desc)])
+  @@index([deleteAfter])
+  @@map("quote_request")
+}
+
+model ConsentRecord {
+  id              String    @id @default(uuid()) @db.Uuid
+  quoteRequestId  String    @unique @map("quote_request_id") @db.Uuid
+  companyId       String    @map("company_id") @db.Uuid
+  policyVersion   String    @map("policy_version")
+  /// SHA-256 of the exact consent sentence shown, in the language shown.
+  consentTextHash String    @map("consent_text_hash")
+  locale          String
+  acceptedAt      DateTime  @map("accepted_at") @db.Timestamptz(3)
+  withdrawnAt     DateTime? @map("withdrawn_at") @db.Timestamptz(3)
+
+  quoteRequest QuoteRequest  @relation(fields: [quoteRequestId], references: [id], onDelete: Cascade)
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  policy       PolicyVersion @relation(fields: [policyVersion], references: [version], onDelete: Restrict)
+
+  @@index([companyId])
+  @@map("consent_record")
+}
+
+model Review {
+  id             String       @id @default(uuid()) @db.Uuid
+  companyId      String       @map("company_id") @db.Uuid
+  /// One review per completed quote request. Null only for sample seed reviews.
+  quoteRequestId String?      @unique @map("quote_request_id") @db.Uuid
+  rating         Int
+  text           String
+  status         ReviewStatus @default(PENDING)
+  isSample       Boolean      @default(false) @map("is_sample")
+  createdAt      DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  quoteRequest QuoteRequest? @relation(fields: [quoteRequestId], references: [id], onDelete: SetNull)
+
+  @@index([companyId, status])
+  @@map("review")
+}
+
+/// Append-only. No personal data and no secrets, ever.
+model AuditLog {
+  id         BigInt   @id @default(autoincrement())
+  actorId    String?  @map("actor_id") @db.Uuid
+  actorRole  String   @map("actor_role")
+  action     String
+  targetType String   @map("target_type")
+  targetId   String?  @map("target_id")
+  requestId  String?  @map("request_id")
+  metadata   Json?
+  at         DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([targetType, targetId])
+  @@index([at])
+  @@map("audit_log")
+}

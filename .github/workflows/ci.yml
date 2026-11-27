@@ -40,6 +40,44 @@ jobs:
           fi
           grep -q "Invalid environment configuration" start.log
 
+  database:
+    name: Database migrations and access tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          # Throwaway CI-only database, not a real secret.
+          POSTGRES_PASSWORD: ci-only-not-secret
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      MIGRATION_DATABASE_URL: postgresql://postgres:ci-only-not-secret@localhost:5432/postgres
+      TEST_ADMIN_DATABASE_URL: postgresql://postgres:ci-only-not-secret@localhost:5432/postgres
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@73e46992e05b19abd31f2f3c20e0e7370d762115 # v6.1.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Apply migrations
+        run: pnpm db:migrate
+      - name: Schema matches migrations
+        run: pnpm db:check-drift
+      - name: Sample seed runs
+        run: pnpm db:seed
+      - name: Seed refuses production
+        run: |
+          if NODE_ENV=production pnpm db:seed; then echo "Seed ran in production mode"; exit 1; fi
+      - name: Access tests (row-level security, roles, append-only audit)
+        run: pnpm test:integration
+
   secrets:
     name: Secret scan (gitleaks, full history)
     runs-on: ubuntu-latest

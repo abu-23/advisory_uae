@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "CI-only throwaway database password"
+regexes = ['''ci-only-not-secret''']
