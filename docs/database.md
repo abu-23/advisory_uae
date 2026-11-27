@@ -8,12 +8,20 @@ PostgreSQL with Prisma. Migrations live in `prisma/migrations` and are committed
 | --- | --- | --- |
 | Schema owner (`MIGRATION_DATABASE_URL`) | `pnpm db:migrate`, `pnpm db:seed` | Create and change tables. Bypasses row-level security as table owner. Never used by the running app. |
 | App login (`DATABASE_URL`) | The running app | Only what the roles below allow. |
+| Sign-in login (`AUTH_DATABASE_URL`) | Better Auth only (users, sessions, passwords, MFA) | Only the `auth_*` tables and `app_user`, plus add-only audit log. The app login cannot read these tables. |
 
 Create the app login once per environment (ops task, not a migration):
 
 ```sql
 CREATE ROLE advisr_app LOGIN NOINHERIT PASSWORD '<from the secrets manager>';
 GRANT app_public, app_company, app_admin TO advisr_app;
+```
+
+The sign-in login is separate, so a bug in a page or an API cannot read password hashes or MFA secrets:
+
+```sql
+CREATE ROLE advisr_auth LOGIN NOINHERIT PASSWORD '<from the secrets manager>';
+GRANT app_auth TO advisr_auth;
 ```
 
 `NOINHERIT` means the login has no table rights of its own. Every transaction must pick a role.

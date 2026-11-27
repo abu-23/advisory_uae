@@ -28,6 +28,7 @@ export const envSchema = z.object({
   /** Which deployment this is. Production-only rules key off this, not NODE_ENV. */
   APP_ENV: z.enum(["development", "test", "staging", "production"]).default("development"),
   DATABASE_URL: notPlaceholder("DATABASE_URL").pipe(z.url({ protocol: /^postgres(ql)?$/ })),
+  AUTH_DATABASE_URL: notPlaceholder("AUTH_DATABASE_URL").pipe(z.url({ protocol: /^postgres(ql)?$/ })),
   REDIS_URL: notPlaceholder("REDIS_URL").pipe(z.url({ protocol: /^rediss?$/ })),
   SESSION_SECRET: notPlaceholder("SESSION_SECRET").pipe(
     z.string().min(32, "SESSION_SECRET must be at least 32 characters"),
@@ -43,11 +44,11 @@ export const envSchema = z.object({
 
 export type Env = z.infer<typeof envSchema>;
 
-/** Production must use HTTPS for the public URL. */
+/** Staging and production must use HTTPS for the public URL. Local runs and CI may use http. */
 const productionRules = (env: Env): string[] => {
   const problems: string[] = [];
-  if ((env.NODE_ENV === "production" || env.APP_ENV === "production") && !env.AUTH_URL.startsWith("https://")) {
-    problems.push("AUTH_URL must use https in production");
+  if ((env.APP_ENV === "production" || env.APP_ENV === "staging") && !env.AUTH_URL.startsWith("https://")) {
+    problems.push("AUTH_URL must use https in staging and production");
   }
   return problems;
 };

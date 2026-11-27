@@ -105,7 +105,8 @@ jobs:
       MIGRATION_DATABASE_URL: postgresql://postgres:ci-only-not-secret@localhost:5432/postgres
       DATABASE_URL: postgresql://advisr_app:ci-only-not-secret@localhost:5432/postgres
       REDIS_URL: redis://localhost:6379
-      AUTH_URL: https://localhost
+      AUTH_DATABASE_URL: postgresql://advisr_auth:ci-only-not-secret@localhost:5432/postgres
+      AUTH_URL: http://localhost:3300
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -120,7 +121,7 @@ jobs:
         run: |
           pnpm db:migrate
           pnpm db:seed
-          psql "$MIGRATION_DATABASE_URL" -c "CREATE ROLE advisr_app LOGIN NOINHERIT PASSWORD 'ci-only-not-secret'; GRANT app_public, app_company, app_admin TO advisr_app;"
+          psql "$MIGRATION_DATABASE_URL" -c "CREATE ROLE advisr_app LOGIN NOINHERIT PASSWORD 'ci-only-not-secret'; GRANT app_public, app_company, app_admin TO advisr_app; CREATE ROLE advisr_auth LOGIN NOINHERIT PASSWORD 'ci-only-not-secret'; GRANT app_auth TO advisr_auth;"
       - name: Throwaway secrets for this run only
         run: |
           echo "SESSION_SECRET=$(openssl rand -base64 32)" >> "$GITHUB_ENV"

@@ -19,11 +19,14 @@
     "db:migrate": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:seed": "prisma db seed",
-    "db:check-drift": "prisma migrate diff --from-config-datasource --to-schema prisma/schema.prisma --exit-code"
+    "db:check-drift": "prisma migrate diff --from-config-datasource --to-schema prisma/schema.prisma --exit-code",
+    "user:create": "tsx scripts/create-user.ts"
   },
   "dependencies": {
+    "@node-rs/argon2": "2.2.2",
     "@prisma/adapter-pg": "7.10.1",
     "@prisma/client": "7.10.1",
+    "better-auth": "1.7.28",
     "next": "16.4.6",
     "next-intl": "4.16.2",
     "pg": "8.23.1",
@@ -42,6 +45,7 @@
     "dotenv": "18.0.10",
     "eslint": "9.39.5",
     "eslint-config-next": "16.4.6",
+    "otplib": "13.6.0",
     "prisma": "7.10.1",
     "tsx": "4.23.15",
     "typescript": "5.9.3",
