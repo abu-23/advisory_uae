@@ -107,7 +107,9 @@ let provider: KeyProvider | undefined;
 /** The app's key provider. Production will use AWS KMS (added before deployment). */
 export function keyProvider(): KeyProvider {
   if (!provider) {
-    if (process.env.NODE_ENV === "production") {
+    // APP_ENV is the deployment (development, test, staging, production);
+    // NODE_ENV is "production" for every optimised build, including CI.
+    if (process.env.APP_ENV === "production") {
       throw new Error("Production must use the KMS key provider, which is not configured yet");
     }
     const key = process.env.FIELD_ENCRYPTION_KEY;

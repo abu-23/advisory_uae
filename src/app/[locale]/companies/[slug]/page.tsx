@@ -124,6 +124,15 @@ export default async function CompanyPage({
         </>
       )}
 
+      {pkg && answers && (
+        <div className="stack-sm">
+          <a href={`/${locale}/quote/${pkg.id}?${answersToQuery(answers)}`} className="btn-primary">
+            {t("cta")}
+          </a>
+          <p className="note">{t("ctaNote")}</p>
+        </div>
+      )}
+
       <section className="card">
         <h2 className="section-title">
           {t("reviewsTitle")}

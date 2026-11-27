@@ -100,3 +100,13 @@ button, input { font: inherit; }
 .review { border-block-start: 1px solid var(--line); padding-block-start: 10px; }
 
 @media (max-width: 380px) { .two-col, .facts { grid-template-columns: 1fr; } }
+
+.field { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; }
+.field input { block-size: 48px; border: 1px solid var(--line); border-radius: 12px; padding-inline: 14px; background: var(--card); font-weight: 400; font-size: 16px; }
+.field input[aria-invalid="true"] { border-color: #b42318; }
+[dir="rtl"] .field input[dir="ltr"] { text-align: end; }
+.consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; }
+.consent input { inline-size: 24px; block-size: 24px; flex: none; margin: 0; accent-color: var(--ink); }
+.hp { position: absolute; inset-inline-start: -10000px; inline-size: 1px; block-size: 1px; overflow: hidden; }
+.btn-primary:disabled { background: #e6eaef; color: var(--ink-2); cursor: not-allowed; }
+.sent-icon { inline-size: 56px; block-size: 56px; border-radius: 50%; background: var(--ok-bg); color: var(--ok); display: grid; place-items: center; font-size: 28px; font-weight: 700; }

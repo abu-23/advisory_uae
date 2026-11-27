@@ -94,6 +94,34 @@
     "verifiedCustomer": "Verified customer · {date}",
     "sampleReview": "Sample review",
     "noReviews": "No verified reviews yet",
-    "notFound": "We couldn't find this company."
+    "notFound": "We couldn't find this company.",
+    "cta": "Request a quote",
+    "ctaNote": "Free. Your details go only to this company, and only with your OK."
+  },
+  "quote": {
+    "title": "Request a quote",
+    "from": "From {company}. Free, no obligation.",
+    "willSee": "What the company will see",
+    "yourDetails": "Your name and one way to reach you",
+    "name": "Your name",
+    "contact": "Phone or email (one is enough)",
+    "consent": "I agree to share these details with {company} only, so they can send me a quote. I can withdraw this at any time.",
+    "privacy": "Privacy notice: link to be added before launch.",
+    "neverAsk": "We never ask for your passport, Emirates ID or bank details here.",
+    "send": "Send request",
+    "tickFirst": "Tick the box above to send.",
+    "errors": {
+      "name": "Please enter your name (2 to 100 characters).",
+      "contact": "Please enter one phone number or one email address.",
+      "consent": "Please tick the box to agree before sending.",
+      "rate": "Too many requests from this connection. Please try again later.",
+      "general": "Something went wrong. Nothing was sent. Please try again."
+    },
+    "sentTitle": "Request sent",
+    "sentBody": "{company} will contact you with a written quote. Only this company received your details.",
+    "beforePay": "Before you pay anything",
+    "beforePayBody": "Check that the quote lists government fees, company fees, visas and renewal costs. Avoid paying the full amount upfront.",
+    "backToCompanies": "Back to companies",
+    "unavailable": "This package is no longer available."
   }
 }
