@@ -16,3 +16,4 @@ backups/
 *.tsbuildinfo
 next-env.d.ts
 .pnpm-store/
+src/generated/
