@@ -9,6 +9,7 @@ import type { Tx } from "@/server/data/db";
  */
 
 export const AUDIT_ACTIONS = [
+  "quote.create",
   "contact.reveal",
   "contact.reveal_denied",
   "verification.set",

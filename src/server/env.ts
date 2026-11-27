@@ -25,6 +25,8 @@ const base64Key32 = z
 
 export const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
+  /** Which deployment this is. Production-only rules key off this, not NODE_ENV. */
+  APP_ENV: z.enum(["development", "test", "staging", "production"]).default("development"),
   DATABASE_URL: notPlaceholder("DATABASE_URL").pipe(z.url({ protocol: /^postgres(ql)?$/ })),
   REDIS_URL: notPlaceholder("REDIS_URL").pipe(z.url({ protocol: /^rediss?$/ })),
   SESSION_SECRET: notPlaceholder("SESSION_SECRET").pipe(
@@ -44,7 +46,7 @@ export type Env = z.infer<typeof envSchema>;
 /** Production must use HTTPS for the public URL. */
 const productionRules = (env: Env): string[] => {
   const problems: string[] = [];
-  if (env.NODE_ENV === "production" && !env.AUTH_URL.startsWith("https://")) {
+  if ((env.NODE_ENV === "production" || env.APP_ENV === "production") && !env.AUTH_URL.startsWith("https://")) {
     problems.push("AUTH_URL must use https in production");
   }
   return problems;
