@@ -3,6 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
 import { twoFactor } from "better-auth/plugins";
 import { createClient } from "@/server/data/db";
+import { authRateLimitStorage } from "@/server/ratelimit/ratelimit";
 import { hashPassword, verifyPassword } from "./password";
 
 /**
@@ -65,10 +66,11 @@ function createAuth() {
       defaultCookieAttributes: { httpOnly: true, sameSite: "lax", secure },
       ipAddress: { ipAddressHeaders: ["x-forwarded-for"] },
     },
-    // Per-connection limits. In-memory here; the production deployment must use
-    // shared storage (Redis) so limits hold across servers.
+    // Per-connection limits. Shared (Redis) in built apps so they hold across servers;
+    // in memory for the dev server.
     rateLimit: {
       enabled: true,
+      customStorage: authRateLimitStorage(),
       window: 60,
       max: 100,
       customRules: {
