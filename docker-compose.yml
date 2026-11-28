@@ -1,0 +1,29 @@
+# Local development only. These passwords are throwaway and the ports are bound to this computer only.
+# Never use this file for a real deployment.
+name: advisr-local
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: localdev
+      POSTGRES_DB: advisr
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - advisr-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d advisr"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7
+    ports:
+      - "127.0.0.1:6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+volumes:
+  advisr-db:

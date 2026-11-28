@@ -15,6 +15,21 @@ Read `CLAUDE.md` for rules and `docs/PRD.md` for scope. `prototype/` is referenc
 
 The server refuses to start if a required value is missing or still a placeholder.
 
+## Run on your own computer (Windows, Mac or Linux)
+
+You need three free programs: Git, Node.js 22 (LTS) and Docker Desktop (start it and wait until it says it is running).
+
+```
+git clone https://github.com/abu-23/advisory_uae.git
+cd advisory_uae
+npm install -g pnpm@10.28.0
+pnpm install
+pnpm local:setup
+pnpm dev
+```
+
+`pnpm local:setup` starts a local database and Redis in Docker, creates a `.env` with fresh random secrets, adds sample data and creates one superadmin account. It prints that account's one-time password once. Then open http://localhost:3000/en or http://localhost:3000/ar. The sign-in page is at `/en/sign-in`. Stop the app with Ctrl+C. Stop the database with `docker compose down` (add `-v` to wipe it). The Docker passwords are throwaway and only for your own computer.
+
 ## Accounts
 
 There is no public sign-up. Accounts are created by an operator:

@@ -20,7 +20,8 @@
     "db:migrate:dev": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "db:check-drift": "prisma migrate diff --from-config-datasource --to-schema prisma/schema.prisma --exit-code",
-    "user:create": "tsx scripts/create-user.ts"
+    "user:create": "tsx --env-file-if-exists=.env scripts/create-user.ts",
+    "local:setup": "node scripts/local-setup.mjs"
   },
   "dependencies": {
     "@node-rs/argon2": "2.2.2",
@@ -30,6 +31,7 @@
     "next": "16.4.6",
     "next-intl": "4.16.2",
     "pg": "8.23.1",
+    "qrcode": "^1.5.4",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "redis": "6.4.0",
@@ -40,6 +42,7 @@
     "@playwright/test": "1.65.1",
     "@types/node": "22.20.7",
     "@types/pg": "8.23.1",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "19.3.3",
     "@types/react-dom": "19.3.0",
     "dotenv": "18.0.10",

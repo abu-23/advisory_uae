@@ -110,3 +110,14 @@ button, input { font: inherit; }
 .hp { position: absolute; inset-inline-start: -10000px; inline-size: 1px; block-size: 1px; overflow: hidden; }
 .btn-primary:disabled { background: #e6eaef; color: var(--ink-2); cursor: not-allowed; }
 .sent-icon { inline-size: 56px; block-size: 56px; border-radius: 50%; background: var(--ok-bg); color: var(--ok); display: grid; place-items: center; font-size: 28px; font-weight: 700; }
+
+/* Sign-in and account */
+.btn-secondary { inline-size: 100%; block-size: 48px; border: 1px solid var(--ink); border-radius: 12px; background: transparent; color: var(--ink); font-weight: 600; cursor: pointer; }
+.btn-secondary:focus-visible, .link-button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.link-button { background: none; border: 0; padding: 8px; color: var(--ink); text-decoration: underline; font-weight: 600; cursor: pointer; }
+.qr { inline-size: min(100%, 260px); block-size: auto; margin-inline: auto; border: 1px solid var(--line); border-radius: 12px; }
+.secret { display: block; padding: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; word-break: break-all; }
+.recovery-codes { list-style: none; margin: 0; padding: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+.recovery-codes code { font-size: 15px; letter-spacing: 0.04em; }
+summary { cursor: pointer; font-weight: 600; padding-block: 8px; }
+.page-footer { max-inline-size: 640px; margin-inline: auto; padding: 8px 20px 28px; font-size: 13px; color: var(--ink-2); }
