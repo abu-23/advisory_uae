@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -12,6 +12,14 @@ export const metadata: Metadata = {
   title: "Advisr UAE",
   description: "Compare UAE business service companies.",
   robots: { index: false, follow: false },
+  icons: { icon: "/icons/icon-192.png", apple: "/icons/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: "Advisr", statusBarStyle: "default" },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#12213a",
 };
 
 export function generateStaticParams() {
@@ -44,6 +52,9 @@ export default async function LocaleLayout({
             </Suspense>
           </header>
           <main className="page">{children}</main>
+          <footer className="page-footer">
+            <a href={`/${locale}/sign-in`}>{t("partnerSignIn")}</a>
+          </footer>
         </NextIntlClientProvider>
       </body>
     </html>

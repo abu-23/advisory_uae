@@ -10,7 +10,8 @@
     "perPeriod": "AED {amount} / {months, plural, =12 {yr} =24 {2 yrs} other {# months}}",
     "notStated": "Not stated",
     "workingDays": "{min, plural, =1 {1} other {#}}–{max} working days",
-    "workingDaysSame": "{days, plural, =1 {1 working day} other {# working days}}"
+    "workingDaysSame": "{days, plural, =1 {1 working day} other {# working days}}",
+    "partnerSignIn": "Partner sign-in"
   },
   "services": {
     "TRADE_LICENSE": "Trade license",
@@ -123,5 +124,48 @@
     "beforePayBody": "Check that the quote lists government fees, company fees, visas and renewal costs. Avoid paying the full amount upfront.",
     "backToCompanies": "Back to companies",
     "unavailable": "This package is no longer available."
+  },
+  "auth": {
+    "signInTitle": "Sign in",
+    "signInIntro": "For partner companies and Advisr staff. Accounts are created by an admin.",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "working": "Please wait…",
+    "codeIntro": "Open your authenticator app and enter the 6-digit code.",
+    "code": "6-digit code",
+    "verify": "Verify",
+    "useRecovery": "Use a recovery code instead",
+    "useAppInstead": "Use my authenticator app instead",
+    "recoveryIntro": "Enter one of your saved recovery codes. Each code works once.",
+    "recoveryCode": "Recovery code",
+    "errors": {
+      "badLogin": "The email or password is not correct.",
+      "badCode": "That code is not correct, or sign-in is paused for a few minutes after repeated mistakes.",
+      "tooMany": "Too many attempts. Please wait a few minutes and try again.",
+      "badPassword": "That password is not correct."
+    },
+    "accountTitle": "Your account",
+    "signedInAs": "Signed in as {name}",
+    "signOut": "Sign out",
+    "roles": {
+      "company": "Company account",
+      "admin": "Admin account",
+      "superadmin": "Superadmin account"
+    },
+    "portalSoon": "You are signed in. Your screens are being added in the next releases.",
+    "enrolTitle": "Set up two-step sign-in",
+    "enrolIntro": "Every account needs an authenticator app (such as Google Authenticator, Microsoft Authenticator or 1Password). Enter your password to start.",
+    "confirmPassword": "Your password",
+    "startSetup": "Start setup",
+    "scanTitle": "Link your authenticator app",
+    "scanIntro": "Scan this code with your authenticator app, then enter the 6-digit code it shows.",
+    "qrLabel": "QR code for your authenticator app",
+    "cantScan": "Can't scan the code?",
+    "typeSecret": "Type this key into your authenticator app instead:",
+    "codesTitle": "Save your recovery codes",
+    "codesIntro": "If you lose your phone, each of these codes lets you in once. They are shown only now. Store them somewhere safe and private.",
+    "codesSaved": "I have saved these codes",
+    "continue": "Continue"
   }
 }
