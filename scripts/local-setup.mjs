@@ -78,7 +78,7 @@ run("pnpm", ["db:migrate"], env);
 say("Creating the restricted database logins");
 const admin = new pg.Client({ connectionString: ADMIN_URL });
 await admin.connect().catch(() => fail("Could not reach the database. Is Docker running?"));
-const login = (name, inherit, role) => `
+const login = (name, inherit) => `
   DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = '${name}') THEN
     CREATE ROLE ${name} LOGIN ${inherit} PASSWORD 'localdev'; END IF; END $$;`;
 await admin.query(login("advisr_app", "NOINHERIT"));
